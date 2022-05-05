@@ -33,7 +33,7 @@ contract PropertyOwnership {
     }
 
 
-    function cancelOwnership(uint week) public {
+    function cancelOwnership(uint week) public restricted{
         require(week <= 52, "week must be <= 52");
         require(depositsOwners[week] == msg.sender, "this week is not yours");
 
