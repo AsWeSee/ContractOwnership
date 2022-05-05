@@ -23,7 +23,7 @@ contract PropertyOwnership {
     function buyOwnership(uint week) public payable{
         require(msg.value > 0, "Send some money at least");
         require(msg.value == weekPrice, "Money must equal price = ");
-        require(week <= 52, "week must be <= 52");
+        require(week < 52, "week must be < 52");
         require(week >= weekStart, "week must be more than weekStart");
         require(week <= weekEnd, "week must be less than weekEnd");
         require(deposits[week] == false, "this week if not free");
@@ -34,7 +34,7 @@ contract PropertyOwnership {
 
 
     function cancelOwnership(uint week) public restricted{
-        require(week <= 52, "week must be <= 52");
+        require(week < 52, "week must be < 52");
         require(depositsOwners[week] == msg.sender, "this week is not yours");
 
         deposits[week] = false;    
@@ -42,8 +42,8 @@ contract PropertyOwnership {
     }
 
     function changeWeeksAvailible(uint weekStarti, uint weekEndi) public restricted{
-        require(weekStarti <= 52, "weekStart must be <= 52");
-        require(weekEndi <= 52, "weekEnd must be <= 52");
+        require(weekStarti < 52, "weekStart must be < 52");
+        require(weekEndi < 52, "weekEnd must be < 52");
   
         weekStart = weekStarti;
         weekEnd = weekEndi;
